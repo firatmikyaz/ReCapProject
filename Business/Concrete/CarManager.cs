@@ -41,10 +41,6 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour == 22)
-            {
-                return new ErrorDataResult<List<CarDetailDto>>(null, Messages.CarsListed);
-            }
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 

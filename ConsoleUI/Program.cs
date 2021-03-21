@@ -13,9 +13,29 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             Console.WriteLine("Arabalar Listeleniyor..........");
-            CarTest();
+            //CarTest();
 
             //BrandTest();
+
+            //UserTest(); //Eksik kalan kısımlar var.
+        }
+
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.GetAll();
+
+            if (result.Success == true)
+            {
+                foreach (var user in result.Data)
+                {
+                    Console.WriteLine(user.FirstName + "/" + user.LastName + "/" + user.Email);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void BrandTest()
@@ -30,13 +50,13 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.GetAll();
+            var result = carManager.GetCarDetails();
 
             if (result.Success == true)
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine(car.Description + "--" + car.DailyPrice + " £");
+                    Console.WriteLine(car.BrandName + "/" + car.ColorName);
                 }
             }
             else
